@@ -1,5 +1,5 @@
 from application import app, db
-from application.models import Users
+from application.models import Users,Posts
 @app.route('/add/<user>')
 @app.route('/add/<user>/<first>/<last>')
 def add(user,first="null",last="null"):
@@ -24,3 +24,12 @@ def update(id,user,first,last):
     first_user.userName = user
     db.session.commit()
     return f"Updated user id {id}"
+
+
+@app.route('/delete/<int:id>')
+def delete(id):
+    user = Users.query.get(id)
+    db.session.delete(user)
+    db.session.commit()
+    return f"Deleted user id {id}"
+
