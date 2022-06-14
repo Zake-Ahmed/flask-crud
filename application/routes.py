@@ -16,9 +16,11 @@ def read():
         Users_string += "<br>"+  "ID:"+str(user.id) + "||First Name:" + user.firstName + "||Last Name:" + user.lastName + "||User Name:" + user.userName 
     return Users_string
 
-@app.route('/update/<name>/<int:id>')
-def update(name,id):
+@app.route('/update/<int:id>/<user>/<first>/<last>')
+def update(id,user,first,last):
     first_user = Users.query.get(id)
-    first_user.name = name
+    first_user.firstName = first
+    first_user.lastName = last
+    first_user.userName = user
     db.session.commit()
-    return first_user.name
+    return f"Updated user id {id}"
