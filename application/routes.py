@@ -1,5 +1,5 @@
 from application import app, db
-from application.models import UserUsers,Posts
+from application.models import Users,Posts
 @app.route('/add/<User>')
 @app.route('/add/<User>/<first>/<last>')
 def add(User,first="null",last="null"):
