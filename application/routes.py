@@ -1,24 +1,24 @@
 from application import app, db
-from application.models import Games
-
-@app.route('/add')
-def add():
-    new_game = Games(name="New Game")
-    db.session.add(new_game)
+from application.models import Users
+@app.route('/add/<user>')
+@app.route('/add/<user>/<first>/<last>')
+def add(user,first="null",last="null"):
+    new_user = Users(firstName=first,lastName=last,userName=user)
+    db.session.add(new_user)
     db.session.commit()
-    return "Added new game to database"
+    return f"Added {user} to database"
 
 @app.route('/read')
 def read():
-    all_games = Games.query.all()
-    games_string = ""
-    for game in all_games:
-        games_string += "<br>"+ game.name
-    return games_string
+    all_Users = Users.query.all()
+    Users_string = ""
+    for user in all_Users:
+        Users_string += "<br>"+  "ID:"+str(user.id) + "||First Name:" + user.firstName + "||Last Name:" + user.lastName + "||User Name:" + user.userName 
+    return Users_string
 
 @app.route('/update/<name>/<int:id>')
 def update(name,id):
-    first_game = Games.query.get(id)
-    first_game.name = name
+    first_user = Users.query.get(id)
+    first_user.name = name
     db.session.commit()
-    return first_game.name
+    return first_user.name
