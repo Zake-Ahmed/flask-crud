@@ -48,10 +48,10 @@ def updatename(oldUser,newUser):
     db.session.commit()
     return f"Updated User {oldUser} to {newUser}"
 
-@app.route('/deletename/<User>')
-def deletename(User):
-    User = Users.query.filter_by(userName=User).first()
+@app.route('/deletename/<Username>')
+def deletename(Username):
+    User = Users.query.filter_by(userName=Username).first()
     db.session.delete(User)
     db.session.commit()
-    return f"Deleted User {User}"
+    return f"Deleted User {Username}"
 
