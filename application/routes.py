@@ -3,22 +3,22 @@ from application.models import Users,Posts
 @app.route('/add/<User>')
 @app.route('/add/<User>/<first>/<last>')
 def add(User,first="null",last="null"):
-    new_User = UserUsers(firstName=first,lastName=last,UserName=User)
+    new_User = Users(firstName=first,lastName=last,UserName=User)
     db.session.add(new_User)
     db.session.commit()
     return f"Added {User} to database"
 
 @app.route('/read')
 def read():
-    all_UserUsers = UserUsers.querUsery.all()
-    UserUsers_string = ""
-    for User in all_UserUsers:
-        UserUsers_string += "<br>"+  "ID:"+str(User.id) + "||First Name:" + User.firstName + "||Last Name:" + User.lastName + "||UserUser Name:" + User.UserName 
-    return UserUsers_string
+    all_Users = Users.query.all()
+    Users_string = ""
+    for User in all_Users:
+        Users_string += "<br>"+  "ID:"+str(User.id) + "||First Name:" + User.firstName + "||Last Name:" + User.lastName + "||UserUser Name:" + User.UserName 
+    return Users_string
 
 @app.route('/update/<int:id>/<User>/<first>/<last>')
 def update(id,User,first,last):
-    first_User = UserUsers.querUsery.get(id)
+    first_User = UserUsers.query.get(id)
     first_User.firstName = first
     first_User.lastName = last
     first_User.UserName = User
@@ -28,8 +28,15 @@ def update(id,User,first,last):
 
 @app.route('/delete/<int:id>')
 def delete(id):
-    User = UserUsers.querUsery.get(id)
+    User = Users.query.get(id)
     db.session.delete(User)
     db.session.commit()
     return f"Deleted User id {id}"
 
+@app.route('/count')
+def count():
+    all_Users = Users.query.all()
+    count=0
+    for User in all_Users:
+        count+=1
+    return f'The number of users in db is {count}'
