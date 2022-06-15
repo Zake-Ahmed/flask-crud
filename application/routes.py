@@ -34,6 +34,7 @@ def delete(id):
     return f"Deleted User id {id}"
 
 
+
 @app.route('/count')
 def count():
     all_Users = Users.query.all()

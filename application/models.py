@@ -9,6 +9,7 @@ class Users(db.Model):
     #post=db.relationship('Post', backref='users')
 
 
+
 class Posts(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     message= db.Column(db.String(280),nullable = False)
